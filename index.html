@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+</head>
+<body ng-app="widgets">
+  <div ng-controller="RestaurantCtrl">
+    <div>
+      <input ng-model="name" type="text"/>
+      <input ng-model="type" type="text"/>
+      <input ng-model="src"  type="text"/>
+      <button ng-click="createRestaurant()">"Create Restaurant"</button>
+    </div>
+
+    <div>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+        </tr>
+        <tr ng-repeat="restaurant in restaurants | orderBy : 'type' | filter : searchCriteria">
+          <td>{{ restaurant.name }}</td>
+          <td>{{ restaurant.type }}</td>
+          <td><img ng-src="{{ restaurant.src }}"/></td>
+          <td ng-click="deleteRestaurant($index)"> Delete </td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <h1>Search</h1>
+      <input ng-model="searchCriteria" type="text"/>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
