@@ -30,4 +30,7 @@ app.controller("PhotoCtrl", ['$scope',
   function($scope){
     $scope.rawFeed = instagramResponse.data;
 
+    $scope.filters = function(){
+      $scope.rawFeed.reduce()
+    }
   }]);

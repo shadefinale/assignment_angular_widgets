@@ -10,6 +10,16 @@
 <body ng-app="widgets">
   <div ng-controller="PhotoCtrl" class="container">
     <div class="row">
+      <div class="btn-group" dropdown keyboard-nav>
+        <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdown-toggle>
+            Dropdown with keyboard navigation <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+            <li role="menuitem"><a href="#">Action</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
       <div ng-repeat="image in rawFeed">
         <photo-info info="image"></photo-info>
       </div>

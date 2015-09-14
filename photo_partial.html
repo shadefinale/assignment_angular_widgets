@@ -1,5 +1,9 @@
 <div class="col-xs-3">
-  <h2> {{ info.user.username }} </h2>
+  <a ng-href="https://instagram.com/{{info.user.username}}/"> <h2> {{ info.user.username }} </h2></a>
   <h4> {{ info.created_time * 1000 | date: 'h:mm' }}, {{ info.created_time * 1000 | date: shortTime }} </h4>
-  <img ng-src="{{ info.images.thumbnail.url }}"></img>
+  <a ng-href="{{info.link}}"> <img ng-src="{{ info.images.thumbnail.url }}"></img></a>
+  <p> #{{info.tags[0]}}</p>
+  <p>Filter: {{info.filter}}</p>
+  <p> Likes: {{info.likes.count}}</p>
+  <p> Comments: {{info.comments.count}}</p>
 </div>
