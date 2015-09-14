@@ -9,8 +9,8 @@ app.controller("RestaurantCtrl", ['$scope',
     $scope.searchCriteria;
     $scope.orderCriteria;
     $scope.createRestaurant = function(){
-      var newRestaurant = { name: $scope.name, type: $scope.type, src: $scope.src}
-      $scope.restaurants.push(newRestaurant)
+      var newRestaurant = { name: $scope.name, type: $scope.type, src: $scope.src};
+      $scope.restaurants.push(newRestaurant);
       $scope.name = "";
       $scope.type = "";
       $scope.src  = "";
@@ -30,13 +30,19 @@ app.controller("PhotoCtrl", ['$scope',
   function($scope){
     $scope.rawFeed = instagramResponse.data;
     $scope.page = 0;
+    $scope.results;
+    $scope.pageSize = 12;
+    $scope.currentUser = "";
+    
     $scope.nextPage = function(){
-      $scope.page++;
-    }
+      if( ($scope.page + 1)*$scope.pageSize < $scope.results.length ){
+        $scope.page++;
+      }
+    };
 
     $scope.prevPage = function(){
       if ($scope.page > 0) $scope.page--;
-    }
+    };
     $scope.hashTagSelect = [];
 
     $scope.filters = function(){
@@ -58,6 +64,12 @@ app.controller("PhotoCtrl", ['$scope',
         return collect;
       }, []);
     };
+
+    $scope.selectUser = function(username){
+      $scope.currentUser = username;
+      console.log(username);
+    };
+  
   }]);
 
 // Cooler filter
@@ -66,7 +78,7 @@ app.filter('selectedTags', function(){
   // collection is the collection to be filtered
   return function(collection, selectedTags){
     // If there is no other collection, or they chose the empty space, return the whole collection back
-    if( !selectedTags || selectedTags.length == 0 || selectedTags[0].length == 0) return collection;
+    if( !selectedTags || selectedTags.length === 0 || selectedTags[0].length === 0) return collection;
 
     // Otherwise, filter the collection, keeping elements that have a tag in common with the selectedTags.
     return collection.filter(function(element){
@@ -83,11 +95,11 @@ app.filter('selectedTags', function(){
 
 app.filter('onPage', function(){
 
-  return function(collection, page){
-    return collection.slice(page * 12, page * 12 + 12)
-  }
+  return function(collection, page, pageSize){
+    return collection.slice(page * pageSize, page * pageSize + pageSize);
+  };
 
-})
+});
 
 
 

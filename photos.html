@@ -9,11 +9,14 @@
 </head>
 <body ng-app="widgets">
   <div ng-controller="PhotoCtrl" class="container">
+    
     <div class="row">
-      <select ng-model="filterSelect">
+      <!-- <select ng-model="filterSelect">
         <option value></option>
         <option ng-repeat="filter in filters()">{{ filter }}</option>
-      </select>
+      </select> -->
+
+      <input type="text" ng-model="filterSelect">
 
       <select ng-model="hashTagSelect" multiple>
         <option value></option>
@@ -23,12 +26,29 @@
       <button ng-click="prevPage()">prev</button>
       <button ng-click="nextPage()">next</button>
     </div>
+    
     <div class="row">
-      <div ng-repeat="image in rawFeed | filter : filterSelect | selectedTags:hashTagSelect | onPage:page">
+      <div ng-repeat="image in results = ( rawFeed | filter : filterSelect | selectedTags:hashTagSelect ) | onPage:page : pageSize | filter : currentUser">
         <photo-info info="image"></photo-info>
       </div>
     </div>
+    
+    <div class="row">
+      <table>
+        <tr ng-click="selectUser('')">
+          <th>Username</th>
+          <th>Full Name</th>
+          <th>Profile Link</th>
+        </tr>
+        <tr ng-repeat="user in results" ng-click="selectUser(user.user.username)">
+          <td> {{ user.user.username}} </td>
+          <td> {{ user.user.full_name }}</td>
+          <td>  <a ng-href="https://instagram.com/{{user.user.username}}/">Link<a/></td>
+        </tr>
+      </table>
+    </div>
   </div>
+  
 
   <script src="photo.js"></script>
   <script src="app.js"></script>
