@@ -29,6 +29,7 @@ app.controller("RestaurantCtrl", ['$scope',
 app.controller("PhotoCtrl", ['$scope',
   function($scope){
     $scope.rawFeed = instagramResponse.data;
+    $scope.hashTagSelect = [];
 
     $scope.filters = function(){
       return $scope.rawFeed.reduce(function(collect, cur){
@@ -50,3 +51,34 @@ app.controller("PhotoCtrl", ['$scope',
       }, []);
     };
   }]);
+
+app.filter('inCollection', function(){
+
+  return function(collection, otherCollection){
+    return true;
+    if(otherCollection.length == 0) return true;
+    console.log(otherCollection);
+    console.log(collection);
+    collection.filter(function(element){
+      // var result = false;
+      element.tags.forEach(function(tag){
+        console.log(tag);
+        if(otherCollection.indexOf(tag.toString()) != -1 ){
+          return true;
+        }
+      });
+      return false;
+
+    });
+  };
+
+});
+
+
+
+
+
+
+
+
+

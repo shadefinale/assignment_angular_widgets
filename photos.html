@@ -15,13 +15,14 @@
         <option ng-repeat="filter in filters()">{{ filter }}</option>
       </select>
 
-      <select ng-model="hashTagSelect">
+      <select ng-model="hashTagSelect" multiple>
         <option value></option>
         <option ng-repeat="tag in hashTags()">{{ tag }}</option>
-      </select>
+      </select><br>
+      <span>{{hashTagSelect}}</span>
     </div>
     <div class="row">
-      <div ng-repeat="image in rawFeed | filter : filterSelect | filter: hashTagSelect">
+      <div ng-repeat="image in rawFeed | filter : filterSelect | inCollection:hashTagSelect">
         <photo-info info="image"></photo-info>
       </div>
     </div>
