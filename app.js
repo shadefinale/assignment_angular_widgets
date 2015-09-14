@@ -31,6 +31,22 @@ app.controller("PhotoCtrl", ['$scope',
     $scope.rawFeed = instagramResponse.data;
 
     $scope.filters = function(){
-      $scope.rawFeed.reduce()
-    }
+      return $scope.rawFeed.reduce(function(collect, cur){
+        if (collect.indexOf(cur.filter) == -1){
+          collect.push(cur.filter);
+        }
+        return collect;
+      }, []);
+    };
+
+    $scope.hashTags = function(){
+      return $scope.rawFeed.reduce(function(collect, cur){
+        cur.tags.forEach(function(tag){
+          if (collect.indexOf(tag) == -1){
+            collect.push(tag);
+          }
+        });
+        return collect;
+      }, []);
+    };
   }]);

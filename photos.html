@@ -10,17 +10,18 @@
 <body ng-app="widgets">
   <div ng-controller="PhotoCtrl" class="container">
     <div class="row">
-      <div class="btn-group" dropdown keyboard-nav>
-        <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" dropdown-toggle>
-            Dropdown with keyboard navigation <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
-            <li role="menuitem"><a href="#">Action</a></li>
-        </ul>
-      </div>
+      <select ng-model="filterSelect">
+        <option value></option>
+        <option ng-repeat="filter in filters()">{{ filter }}</option>
+      </select>
+
+      <select ng-model="hashTagSelect">
+        <option value></option>
+        <option ng-repeat="tag in hashTags()">{{ tag }}</option>
+      </select>
     </div>
     <div class="row">
-      <div ng-repeat="image in rawFeed">
+      <div ng-repeat="image in rawFeed | filter : filterSelect | filter: hashTagSelect">
         <photo-info info="image"></photo-info>
       </div>
     </div>

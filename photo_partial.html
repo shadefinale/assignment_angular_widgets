@@ -2,7 +2,7 @@
   <a ng-href="https://instagram.com/{{info.user.username}}/"> <h2> {{ info.user.username }} </h2></a>
   <h4> {{ info.created_time * 1000 | date: 'h:mm' }}, {{ info.created_time * 1000 | date: shortTime }} </h4>
   <a ng-href="{{info.link}}"> <img ng-src="{{ info.images.thumbnail.url }}"></img></a>
-  <p> #{{info.tags[0]}}</p>
+  <p ng-repeat="hashtag in info.tags">{{ hashtag }}</p>
   <p>Filter: {{info.filter}}</p>
   <p> Likes: {{info.likes.count}}</p>
   <p> Comments: {{info.comments.count}}</p>
