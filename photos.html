@@ -18,11 +18,13 @@
       <select ng-model="hashTagSelect" multiple>
         <option value></option>
         <option ng-repeat="tag in hashTags()">{{ tag }}</option>
-      </select><br>
-      <span>{{hashTagSelect}}</span>
+      </select>
+
+      <button ng-click="prevPage()">prev</button>
+      <button ng-click="nextPage()">next</button>
     </div>
     <div class="row">
-      <div ng-repeat="image in rawFeed | filter : filterSelect | inCollection:hashTagSelect">
+      <div ng-repeat="image in rawFeed | filter : filterSelect | selectedTags:hashTagSelect | onPage:page">
         <photo-info info="image"></photo-info>
       </div>
     </div>
@@ -33,3 +35,4 @@
   <script src="directive.js"></script>
 </body>
 </html>
+

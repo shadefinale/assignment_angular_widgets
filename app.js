@@ -29,6 +29,14 @@ app.controller("RestaurantCtrl", ['$scope',
 app.controller("PhotoCtrl", ['$scope',
   function($scope){
     $scope.rawFeed = instagramResponse.data;
+    $scope.page = 0;
+    $scope.nextPage = function(){
+      $scope.page++;
+    }
+
+    $scope.prevPage = function(){
+      if ($scope.page > 0) $scope.page--;
+    }
     $scope.hashTagSelect = [];
 
     $scope.filters = function(){
@@ -52,27 +60,34 @@ app.controller("PhotoCtrl", ['$scope',
     };
   }]);
 
-app.filter('inCollection', function(){
+// Cooler filter
+app.filter('selectedTags', function(){
+  // The filter applies the following logic
+  // collection is the collection to be filtered
+  return function(collection, selectedTags){
+    // If there is no other collection, or they chose the empty space, return the whole collection back
+    if( !selectedTags || selectedTags.length == 0 || selectedTags[0].length == 0) return collection;
 
-  return function(collection, otherCollection){
-    return true;
-    if(otherCollection.length == 0) return true;
-    console.log(otherCollection);
-    console.log(collection);
-    collection.filter(function(element){
-      // var result = false;
+    // Otherwise, filter the collection, keeping elements that have a tag in common with the selectedTags.
+    return collection.filter(function(element){
+      var result = false;
       element.tags.forEach(function(tag){
-        console.log(tag);
-        if(otherCollection.indexOf(tag.toString()) != -1 ){
-          return true;
+        if(selectedTags.indexOf(tag) != -1 ){
+          result = true;
         }
       });
-      return false;
-
+      return result;
     });
   };
-
 });
+
+app.filter('onPage', function(){
+
+  return function(collection, page){
+    return collection.slice(page * 12, page * 12 + 12)
+  }
+
+})
 
 
 
