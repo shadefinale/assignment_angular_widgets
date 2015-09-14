@@ -7,6 +7,7 @@ app.controller("RestaurantCtrl", ['$scope',
     $scope.type;
     $scope.src;
     $scope.searchCriteria;
+    $scope.orderCriteria;
     $scope.createRestaurant = function(){
       var newRestaurant = { name: $scope.name, type: $scope.type, src: $scope.src}
       $scope.restaurants.push(newRestaurant)
@@ -17,5 +18,17 @@ app.controller("RestaurantCtrl", ['$scope',
     };
     $scope.deleteRestaurant = function(idx){
       $scope.restaurants.splice(idx,1);
-    }
+    };
+
+    $scope.orderRestaurants = function(arg){
+      $scope.orderCriteria = arg;
+      console.log(arg);
+    };
   }]);
+
+  app.controller("PhotoCtrl", ['$scope',
+    function($scope){
+
+      $scope.rawFeed = instagramResponse;
+
+    }]);

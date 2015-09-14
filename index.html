@@ -17,10 +17,10 @@
     <div>
       <table>
         <tr>
-          <th>Name</th>
-          <th>Type</th>
+          <th ng-click="orderRestaurants('name')">Name</th>
+          <th ng-click="orderRestaurants('type')">Type</th>
         </tr>
-        <tr ng-repeat="restaurant in restaurants | orderBy : 'type' | filter : searchCriteria">
+        <tr ng-repeat="restaurant in restaurants | orderBy : orderCriteria | filter : searchCriteria">
           <td>{{ restaurant.name }}</td>
           <td>{{ restaurant.type }}</td>
           <td><img ng-src="{{ restaurant.src }}"/></td>
