@@ -26,9 +26,8 @@ app.controller("RestaurantCtrl", ['$scope',
     };
   }]);
 
-  app.controller("PhotoCtrl", ['$scope',
-    function($scope){
+app.controller("PhotoCtrl", ['$scope',
+  function($scope){
+    $scope.rawFeed = instagramResponse.data;
 
-      $scope.rawFeed = instagramResponse;
-
-    }]);
+  }]);

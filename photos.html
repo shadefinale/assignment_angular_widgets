@@ -6,16 +6,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body ng-app="widgets">
-  
-  <script src="photos.js"></script>
+  <div ng-controller="PhotoCtrl" class="container">
+    <div class="row">
+      <div ng-repeat="image in rawFeed">
+        <photo-info info="image"></photo-info>
+      </div>
+    </div>
+  </div>
+
+  <script src="photo.js"></script>
   <script src="app.js"></script>
+  <script src="directive.js"></script>
 </body>
 </html>
